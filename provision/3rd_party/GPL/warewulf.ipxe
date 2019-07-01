@@ -1,4 +1,0 @@
-#!ipxe
-set user-class warewulf
-autoboot
-

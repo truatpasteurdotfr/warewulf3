@@ -8,7 +8,6 @@ all: $(IPXETARGETS)
 
 IPXE_VERSION = 041d362
 IPXE_SOURCE = $(top_srcdir)/3rd_party/GPL/ipxe-$(IPXE_VERSION).tar.xz
-IPXE_WW = $(top_srcdir)/3rd_party/GPL/warewulf.ipxe
 IPXE_DIR = ipxe-$(IPXE_VERSION)
 
 
@@ -17,13 +16,12 @@ prep:
 		echo "Extracting IPXE" ;\
 		mkdir -p _work/ ;\
 		tar -xJf $(IPXE_SOURCE) -C _work/ ;\
-		cp -f $(IPXE_WW)  _work/$(IPXE_DIR)/src ;\
 	fi
 
 bin-i386-pcbios/undionly.kpxe: prep
 
 if BUILD_X86_64
-	$(MAKE) -C _work/$(IPXE_DIR)/src CROSS_COMPILE=$(CROSS_COMPILE_X86_64) bin-i386-pcbios/undionly.kpxe EMBED=warewulf.ipxe
+	$(MAKE) -C _work/$(IPXE_DIR)/src CROSS_COMPILE=$(CROSS_COMPILE_X86_64) bin-i386-pcbios/undionly.kpxe
 endif
 
 bin-x86_64-efi/snp.efi: prep
